@@ -45,30 +45,36 @@ const ImageShow = ({ images }) => {
         </svg>
       </button>
 
-      <Swiper
-        slidesPerView={1}
-        keyboard={{
-          enabled: true,
-        }}
-        pagination={{
-          clickable: true,
-          type: "fraction",
-        }}
-        loop={true}
-        initialSlide={initialImage}
-        navigation={true}
-        modules={[Keyboard, Pagination, Navigation]}
-        className="h-[98.7vh] "
-      >
-        {images?.map((image, index) => (
-          <SwiperSlide
-            key={index}
-            className=" flex align-middle justify-center"
-          >
-            <img src={image.image} alt="s" className="h-full object-cover " />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="relative h-full">
+        <Swiper
+          slidesPerView={1}
+          keyboard={{
+            enabled: true,
+          }}
+          pagination={{
+            clickable: true,
+            type: "fraction",
+          }}
+          loop={true}
+          initialSlide={initialImage}
+          navigation={true}
+          modules={[Keyboard, Pagination, Navigation]}
+          className="h-full"
+        >
+          {images?.map((image, index) => (
+            <SwiperSlide
+              key={index}
+              className="flex items-center justify-center"
+            >
+              <img
+                src={image.image}
+                alt="Slide"
+                className="max-h-full max-w-full"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 };
