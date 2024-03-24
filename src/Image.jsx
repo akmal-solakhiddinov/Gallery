@@ -23,6 +23,17 @@ const ImageShow = ({ images }) => {
     if (!state.isLogin) navigate("/login");
   }, [state.isLogin]);
 
+  useEffect(() => {
+    const goBack = (e) => {
+      if (e.key === "Escape") {
+        navigate(-1);
+      }
+    };
+
+    document.addEventListener("keydown", goBack);
+    return () => document.removeEventListener("keydown", goBack);
+  }, []);
+
   return (
     <div className="relative w-full h-full bg-gray-800 py-1">
       <button
@@ -45,36 +56,30 @@ const ImageShow = ({ images }) => {
         </svg>
       </button>
 
-      <div className="relative h-full">
-        <Swiper
-          slidesPerView={1}
-          keyboard={{
-            enabled: true,
-          }}
-          pagination={{
-            clickable: true,
-            type: "fraction",
-          }}
-          loop={true}
-          initialSlide={initialImage}
-          navigation={true}
-          modules={[Keyboard, Pagination, Navigation]}
-          className="h-full"
-        >
-          {images?.map((image, index) => (
-            <SwiperSlide
-              key={index}
-              className="flex items-center justify-center"
-            >
-              <img
-                src={image.image}
-                alt="Slide"
-                className="max-h-full max-w-full"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <Swiper
+        slidesPerView={1}
+        keyboard={{
+          enabled: true,
+        }}
+        pagination={{
+          clickable: true,
+          type: "fraction",
+        }}
+        loop={true}
+        initialSlide={initialImage}
+        navigation={true}
+        modules={[Keyboard, Pagination, Navigation]}
+        className="h-[98.7vh] "
+      >
+        {images?.map((image, index) => (
+          <SwiperSlide
+            key={index}
+            className=" flex align-middle justify-center"
+          >
+            <img src={image.image} alt="s" className=" object-contain " />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
