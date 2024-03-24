@@ -5,9 +5,7 @@ import UploadModal from "./UploadModal.jsx";
 
 const Header = () => {
   const { logout, state, login, uploadImage } = useAuth();
-
   const [toggleModal, setToggleModal] = useState(false);
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -16,39 +14,42 @@ const Header = () => {
   };
 
   return (
-    <>
-      <header className="mx-auto flex items-center justify-between p-6 lg:px-8 bg-gray-800 text-white">
-        <Link to="/gallery" className="font-semibold text-lg">
-          Gallery
-        </Link>
-
+    <header className="bg-gray-800 text-white">
+      <div className="container mx-auto p-4 lg:px-8 flex flex-wrap justify-between items-center">
         <div className="flex items-center gap-4">
-          <h1 className="mr-4">
+          <Link to="/gallery" className="font-semibold text-lg">
+            Gallery
+          </Link>
+
+          <h1 className="mr-4 text-sm">
             Welcome, <Link to={"/account"}>{state?.user?.email}</Link>
           </h1>
+        </div>
+
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setToggleModal(true)}
-            className="rounded-md p-2 bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+            className="rounded-md px-3 py-1 bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xs sm:text-sm"
           >
-            Add Photo
+            New
           </button>
           {state.isLogin ? (
             <button
               onClick={handleLogout}
-              className="rounded-md p-2 bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 text-white"
+              className="rounded-md px-3 py-1 bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 text-white text-xs sm:text-sm"
             >
               Logout
             </button>
           ) : (
             <button
               onClick={handleLogout}
-              className="rounded-md p-2 bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 text-white"
+              className="rounded-md px-3 py-1 bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 text-white text-xs sm:text-sm"
             >
               Login
             </button>
           )}
         </div>
-      </header>
+      </div>
 
       {toggleModal && (
         <UploadModal
@@ -56,7 +57,7 @@ const Header = () => {
           onToggleModal={setToggleModal}
         />
       )}
-    </>
+    </header>
   );
 };
 
